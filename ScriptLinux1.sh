@@ -14,5 +14,5 @@ echo "ldap-auth-config ldap-auth-config/ldap-version select 3" | sudo debconf-se
 #Tras configurar los parametros por defecto de ldap-auth-config al instalar los paquetes del ldap no requeriran intervencion del usuario
 DEBIAN_FRONTEND=noninteractive apt-get install -y libnss-ldap libpam-ldap ldap-utils
 #Configuracion del Equipo cliente
-sudo sed -i 's/files/files ldap/g' /etc/nsswitch.conf
-echo "session optional pam_mkhomedir.so skel=/etc/skel umask=077" >> /etc/pam.d/common-session
+sudo sed -i 's/files systemd sss/files ldap/g' /etc/nsswitch.conf
+echo "session optional  pam_mkhomedir.so  skel=/etc/skel  umask=077" >> /etc/pam.d/common-session
