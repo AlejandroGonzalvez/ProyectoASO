@@ -50,7 +50,7 @@ case $opcion in
 		#Anadir el usuario al registro LDAP
 		ldapadd -x -D "cn=admin,dc=AlexServer,dc=Local" -W -f UsuariosScript.ldif
 		#Limpiar el archivo ldif
-		> "$ldif_file"
+		: > "$ldif_file"
 	;;
 	#Codigo para modificar un usuario LDAP
 	2)
