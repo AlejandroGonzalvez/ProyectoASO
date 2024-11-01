@@ -1,4 +1,7 @@
 #!/bin/bash
+# Leer el uidNumber del archivo externo
+uid_file="/home/alejandro/ASOProyecto/uidNumber.txt"
+uidNumber=$(<"$uid_file")
 #Mostrar el menu
 echo "Pulse 1 si quiere crear una nueva entrada en el directorio LDAP"
 echo "Pulse 2 si quiere modificar una entrada en el directorio LDAP"
@@ -21,7 +24,7 @@ case $opcion in
 		echo "sn: "$apellido >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
 		echo "givenName: "$nombre >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
 		echo "cn: "$nombre >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "cn: " >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
+		echo "uidNumber: "$uidNumber >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
 		echo "gidNumber: 10000" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
 		echo "userPassword: "$contrasena >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
 		echo "gecos: "$nombre >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
@@ -37,6 +40,13 @@ case $opcion in
 		echo "o:AlexServer" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
 		echo "initials: "$iniciales >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
 		echo >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
+		
+		#Icrementar el uidNumber
+		((uidNumber++))
+		#Guardar el uidNumber incrementado
+		echo "$uidNumber" > "$uid_file"
+		#Anadir el usuario al registro LDAP
+		ldapadd -x -D "cn=admin,dc=AlexServer,dc=Local" -W -f UsuariosScript.ldif
 	;;
 	#Codigo para modificar un usuario LDAP
 	2)
