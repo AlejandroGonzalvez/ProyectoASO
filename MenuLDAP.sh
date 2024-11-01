@@ -12,6 +12,7 @@ case $opcion in
 		read -p "Por favor, ingresa tu apellido: " apellido
 		read -p "Por favor, ingresa tus iniciales: " iniciales
 		read -s -p "Por favor, ingresa tu contraseña: " contrasena
+  		echo  # Annade el salto de linea
 		echo "dn: uid="$nombre",ou=usuarios,dc=alexServer,dc=Local" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
 	;;
 	#Codigo para modificar un usuario LDAP
