@@ -10,9 +10,8 @@ case $opcion in
 		#Leer las opciones necesarias para crear el usuario
 		read -p "Por favor, ingresa tu nombre: " nombre
 		read -p "Por favor, ingresa tu apellido: " apellido
-		read -s -p "Por favor, ingresa tu contraseña: " contrasena
 		read -p "Por favor, ingresa tus iniciales: " iniciales
-		#Meter la informacion en un archivo Ldif
+		read -s -p "Por favor, ingresa tu contraseña: " contrasena
 		echo "dn: uid=" $nombre ",ou=usuarios,dc=alexServer,dc=Local" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
 	;;
 	#Codigo para modificar un usuario LDAP
