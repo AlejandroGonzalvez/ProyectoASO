@@ -11,42 +11,46 @@ case $opcion in
 	#Codigo para crear un nuevo usuario LDAP
 	1)
 		#Leer las opciones necesarias para crear el usuario
+		ldif_file="/home/alejandro/ASOProyecto/UsuariosScript.ldif"
 		read -p "Por favor, ingresa tu nombre: " nombre
 		read -p "Por favor, ingresa tu apellido: " apellido
 		read -p "Por favor, ingresa tus iniciales: " iniciales
 		read -s -p "Por favor, ingresa tu contraseña: " contrasena
   		echo  # Annade el salto de linea
-		echo "dn: uid="$nombre",ou=usuarios,dc=alexServer,dc=Local" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "objectClass:inetOrgPerson" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "objectClass: posixAccount" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "objectClass: shadowAccount" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "uid: "$nombre >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "sn: "$apellido >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "givenName: "$nombre >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "cn: "$nombre >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "uidNumber: "$uidNumber >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "gidNumber: 10000" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "userPassword: "$contrasena >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "gecos: "$nombre >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "loginShell: /bin/bash" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "homeDirectory:/home/"$nombre >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "shadowExpire: -1" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "shadowFlag: 0" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "shadowWarning: 7" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "shadowMin: 8" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "shadowMax: 999999" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "shadowLastChange: 10877" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "mail: "$nombre"@AlexServer.com" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "o:AlexServer" >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo "initials: "$iniciales >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		echo >> /home/alejandro/ASOProyecto/UsuariosScript.ldif
-		
+		echo "dn: uid="$nombre",ou=usuarios,dc=alexServer,dc=Local" >> $ldif_file
+		echo "objectClass:inetOrgPerson" >> $ldif_file
+		echo "objectClass: posixAccount" >> $ldif_file
+		echo "objectClass: shadowAccount" >> $ldif_file
+		echo "uid: "$nombre >> $ldif_file
+		echo "sn: "$apellido >> $ldif_file
+		echo "givenName: "$nombre >> $ldif_file
+		echo "cn: "$nombre >> $ldif_file
+		echo "uidNumber: "$uidNumber >> $ldif_file
+		echo "gidNumber: 10000" >> $ldif_file
+		echo "userPassword: "$contrasena >> $ldif_file
+		echo "gecos: "$nombre >> $ldif_file
+		echo "loginShell: /bin/bash" >> $ldif_file
+		echo "homeDirectory:/home/"$nombre >> $ldif_file
+		echo "shadowExpire: -1" >> /$ldif_file
+		echo "shadowFlag: 0" >> $ldif_file
+		echo "shadowWarning: 7" >> $ldif_file
+		echo "shadowMin: 8" >> $ldif_file
+		echo "shadowMax: 999999" >> $ldif_file
+		echo "shadowLastChange: 10877" >> $ldif_file
+		echo "mail: "$nombre"@AlexServer.com" >> $ldif_file
+		echo "o:AlexServer" >> $ldif_file
+		echo "initials: "$iniciales >> $ldif_file
+		echo >> $ldif_file
+		#Guardar el usuario en unsegundo archivo para tener la informacion
+		cat "$ldif_file" >> UsariosLDAP.txt
 		#Icrementar el uidNumber
 		((uidNumber++))
 		#Guardar el uidNumber incrementado
 		echo "$uidNumber" > "$uid_file"
 		#Anadir el usuario al registro LDAP
 		ldapadd -x -D "cn=admin,dc=AlexServer,dc=Local" -W -f UsuariosScript.ldif
+		#Limpiar el archivo ldif
+		> "$ldif_file"
 	;;
 	#Codigo para modificar un usuario LDAP
 	2)
