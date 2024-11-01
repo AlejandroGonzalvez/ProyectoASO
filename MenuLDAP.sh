@@ -13,7 +13,7 @@ case $opcion in
 		read -s -p "Por favor, ingresa tu contraseña: " contrasena
 		read -p "Por favor, ingresa tus iniciales: " iniciales
 		#Meter la informacion en un archivo Ldif
-		echo "dn: uid=" $nombre ",ou=usuarios,dc=alexServer,dc=Local"
+		echo "dn: uid=" $nombre ",ou=usuarios,dc=alexServer,dc=Local" >> /nome/alejandro/ASOProyecto/UsuariosScript.ldif
 	;;
 	#Codigo para modificar un usuario LDAP
 	2)
