@@ -71,7 +71,7 @@ case $opcion in
 	#Codigo para eliminar un usuario LDAP
 	3)
 		read -p "Introduzaca el nombre del usuario qu desea eliminar: " nombre
-		ldapdelete -x -W -D cn=admin,dc=AlexServer,dc=Local dn: uid=$nombre,ou=usuarios,dc=alexServer,dc=Local
+		ldapdelete -x -W -D cn=admin,dc=AlexServer,dc=Local uid=$nombre,ou=usuarios,dc=alexServer,dc=Local
 	;;
 	#Codigo de error si el usuario introduce algo inesperado
 	*)
