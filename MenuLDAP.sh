@@ -56,7 +56,7 @@ case $opcion in
 	2)
 		#Pedir el usuario a modificar, el campo a modificar y a que se modificara
 		ldif_file="/home/alejandro/ASOProyecto/Modificacion.ldif"
-		read -p "Introduzaca el nombre del usuario qu desea modifcar: " nombre
+		read -p "Introduzaca el nombre del usuario que desea modifcar: " nombre
 		read -p "Introduzca el campo a modificar (cn, sn, mail...etc): " campo
 		read -p "Introduzca el campo modificado: " nuevoCampo
 		echo "dn: uid="$nombre",ou=usuarios,dc=alexServer,dc=Local" >> $ldif_file
@@ -70,7 +70,7 @@ case $opcion in
 	;;
 	#Codigo para eliminar un usuario LDAP
 	3)
-		read -p "Introduzaca el nombre del usuario qu desea eliminar: " nombre
+		read -p "Introduzaca el nombre del usuario que desea eliminar: " nombre
 		ldapdelete -x -W -D cn=admin,dc=AlexServer,dc=Local uid=$nombre,ou=usuarios,dc=alexServer,dc=Local
 	;;
 	#Codigo de error si el usuario introduce algo inesperado
