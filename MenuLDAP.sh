@@ -1,6 +1,6 @@
 #!/bin/bash
 # Leer el uidNumber del archivo externo
-uid_file="/home/alejandro/ASOProyecto/uidNumber.txt"
+uid_file="/home/alejandro/ASOProyecto/ArchivosLDAP/uidNumber.txt"
 uidNumber=$(<"$uid_file")
 #Mostrar el menu
 echo "Pulse 1 si quiere crear una nueva entrada en el directorio LDAP"
@@ -11,7 +11,7 @@ case $opcion in
 	#Codigo para crear un nuevo usuario LDAP
 	1)
 		#Leer las opciones necesarias para crear el usuario
-		ldif_file="/home/alejandro/ASOProyecto/UsuariosScript.ldif"
+		ldif_file="/home/alejandro/ASOProyecto/ArchivosLDAP/UsuariosScript.ldif"
 		read -p "Por favor, ingresa tu nombre: " nombre
 		read -p "Por favor, ingresa tu apellido: " apellido
 		read -p "Por favor, ingresa tus iniciales: " iniciales
@@ -55,7 +55,7 @@ case $opcion in
 	#Codigo para modificar un usuario LDAP
 	2)
 		#Pedir el usuario a modificar, el campo a modificar y a que se modificara
-		ldif_file="/home/alejandro/ASOProyecto/Modificacion.ldif"
+		ldif_file="/home/alejandro/ASOProyecto/ArchivosLDAP/Modificacion.ldif"
 		read -p "Introduzaca el nombre del usuario que desea modifcar: " nombre
 		read -p "Introduzca el campo a modificar (cn, sn, mail...etc): " campo
 		read -p "Introduzca el campo modificado: " nuevoCampo
