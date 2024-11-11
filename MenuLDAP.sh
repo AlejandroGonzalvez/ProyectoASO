@@ -42,7 +42,7 @@ case $opcion in
 		echo "initials: "$iniciales >> $ldif_file
 		echo >> $ldif_file
 		#Guardar el usuario en unsegundo archivo para tener la informacion
-		cat $ldif_file >> UsuariosLDAP.txt
+		cat $ldif_file >> /home/alejandro/ASOProyecto/ArchivosLDAP/UsuariosLDAP.txt
 		#Icrementar el uidNumber
 		((uidNumber++))
 		#Guardar el uidNumber incrementado
