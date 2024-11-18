@@ -3,13 +3,13 @@ Jugando=0
 Intentos=0
 NumRandom=$(($RANDOM % 100))
 #Mostrar el menu
-while [[ $jugando -e 0 ]]; do
+while [[ $jugando -eq 0 ]]; do
 echo "1.Jugar"
 echo "2.Salir"
 read opcion
 case $opcion in
   1)
-    while [[ $Jugando -e 0 ]]; do
+    while [[ $Jugando -eq 0 ]]; do
     echo "Intente adivinar un numero generado de forma random entre el 1 y el 100"
     echo "Introduzca el numero"
     read guess
@@ -17,7 +17,7 @@ case $opcion in
     if [ $guess -e $NumRandom ]; then
       echo "Felicidades lo has conseguido en $Intentos intentos"
       $Jugando= 1 
-    elif [ $guess -g $numRandom ]; then
+    elif [ $guess -gt $numRandom ]; then
       echo "Es un numero menor vuelve a intentarlo"
     else
       echo "Es un numero menor vuelve a intentarlo"
