@@ -16,7 +16,7 @@ case $opcion in
     (($Intentos++))
     if [ $guess -e $NumRandom ]; then
       echo "Felicidades lo has conseguido en $Intentos intentos"
-      $Jugando=1 
+      echo 1 > $Jugando 
     elif [ $guess -gt $numRandom ]; then
       echo "Es un numero menor vuelve a intentarlo"
     else
@@ -26,7 +26,7 @@ case $opcion in
   ;;
   2)
     echo "Gracias por jugar. ¡Hasta pronto!"
-    $Jugando=1 
+    echo 1 > $Jugando 
   ;;
   *)
     echo "Opción no válida. Por favor, selecciona 1 o 2."
