@@ -23,6 +23,7 @@ case $opcion in
     else
       echo "Es un numero menor vuelve a intentarlo"
     fi
+    done
   ;;
   2)
     echo "Gracias por jugar. ¡Hasta pronto!”"
@@ -30,3 +31,4 @@ case $opcion in
   *)
     echo "Opción no válida. Por favor, selecciona 1 o 2."
   ;;
+  done
