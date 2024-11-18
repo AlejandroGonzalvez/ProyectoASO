@@ -4,7 +4,7 @@ Jugando= 0
 Intentos= 0
 NumRandom= $(($RANDOM % 100))
 #Mostrar el menu
-
+while $jugando -e 0; do
 echo "1.Jugar"
 echo "2.Salir"
 read opcion
@@ -15,10 +15,10 @@ case $opcion in
     echo "Introduzca el numero"
     read guess
     (($Intentos++))
-    if ($guess e $NumRandom) then
+    if ($guess e $NumRandom); then
       echo "Felicidades lo has conseguido en $Intentos intentos"
       $Jugando= 1 
-    if else ($guess g $numRandom) then
+    if else ($guess g $numRandom); then
       echo "Es un numero menor vuelve a intentarlo"
     else
       echo "Es un numero menor vuelve a intentarlo"
