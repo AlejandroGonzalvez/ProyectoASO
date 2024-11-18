@@ -26,6 +26,7 @@ case $opcion in
   ;;
   2)
     echo "Gracias por jugar. ¡Hasta pronto!”"
+    done
   ;;
   *)
     echo "Opción no válida. Por favor, selecciona 1 o 2."
