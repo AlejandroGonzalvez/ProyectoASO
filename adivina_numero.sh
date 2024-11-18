@@ -1,7 +1,7 @@
 #!/bin/bash
 Jugando=0
 Intentos=0
-NumRandom= $(($RANDOM % 100))
+NumRandom=$(($RANDOM % 100))
 #Mostrar el menu
 while [[ $jugando -e 0 ]]; do
 echo "1.Jugar"
