@@ -30,4 +30,5 @@ case $opcion in
   *)
     echo "Opción no válida. Por favor, selecciona 1 o 2."
   ;;
+  esac
   done
