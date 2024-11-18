@@ -14,7 +14,7 @@ case $opcion in
     echo "Introduzca el numero"
     read guess
     (($Intentos++))
-    if [ $guess -e $NumRandom ]; then
+    if [ $guess -eq $NumRandom ]; then
       echo "Felicidades lo has conseguido en $Intentos intentos"
       echo 1 > $Jugando 
     elif [ $guess -gt $numRandom ]; then
