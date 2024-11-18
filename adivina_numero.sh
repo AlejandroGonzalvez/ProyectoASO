@@ -1,5 +1,4 @@
 #!/bin/bash
-# Leer el uidNumber del archivo externo
 Jugando= 0
 Intentos= 0
 NumRandom= $(($RANDOM % 100))
