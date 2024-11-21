@@ -14,13 +14,14 @@ read opcion
         echo "Introduzca el numero"
         read guess
         (($Intentos++))
-        if [ $guess -eq $NumRandom ]; then
-          echo "Felicidades lo has conseguido en $Intentos intentos"
-          exit 0
-        elif [ $guess -gt $numRandom ]; then
-          echo "Es un numero menor vuelve a intentarlo"
+        if [ "$guess" < $NumRandom ]; then
+            echo "Es un numero mayor vuelve a intentarlo"
+        elif [ "$guess" > $numRandom ]; then
+            echo "Es un numero menor vuelve a intentarlo"
         else
-          echo "Es un numero menor vuelve a intentarlo"
+            echo "¡Felicidades! Has adivinado el número."
+            echo "Lo lograste en $intentos intentos."
+            break
         fi
         done
       ;;
