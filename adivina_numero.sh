@@ -1,7 +1,6 @@
 #!/bin/bash
-Jugando=0
 Intentos=0
-NumRandom=$(($RANDOM % 100))
+NumRandom=$(($RANDOM % 100 +1))
 #Mostrar el menu
 while true; do
 echo "1.Jugar"
@@ -14,9 +13,9 @@ read opcion
         echo "Introduzca el numero"
         read guess
         ((Intentos++))
-        if [ guess < NumRandom ]; then
+        if (([ guess < NumRandom ))]; then
             echo "Es un numero mayor vuelve a intentarlo"
-        elif [ guess > NumRandom ]; then
+        elif (( guess > NumRandom )); then
             echo "Es un numero menor vuelve a intentarlo"
         else
             echo "¡Felicidades! Has adivinado el número."
