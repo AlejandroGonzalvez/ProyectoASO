@@ -13,10 +13,10 @@ read opcion
         echo "Intente adivinar un numero generado de forma random entre el 1 y el 100"
         echo "Introduzca el numero"
         read guess
-        (($Intentos++))
-        if [ "$guess" < $NumRandom ]; then
+        ((Intentos++))
+        if [ guess < NumRandom ]; then
             echo "Es un numero mayor vuelve a intentarlo"
-        elif [ "$guess" > $numRandom ]; then
+        elif [ guess > NumRandom ]; then
             echo "Es un numero menor vuelve a intentarlo"
         else
             echo "¡Felicidades! Has adivinado el número."
