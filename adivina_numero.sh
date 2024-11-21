@@ -1,35 +1,56 @@
 #!/bin/bash
-Jugando=0
-Intentos=0
-NumRandom=$(( RANDOM % 100 + 1 )
-#Mostrar el menu
-while [[ $jugando -eq 0 ]]; do
-echo "1.Jugar"
-echo "2.Salir"
-read opcion
-case $opcion in
-  1)
-    while [[ $Jugando -eq 0 ]]; do
-    echo "Intente adivinar un numero generado de forma random entre el 1 y el 100"
-    echo "Introduzca el numero"
-    read guess
-    (($Intentos++))
-    if [ $guess -eq $NumRandom ]; then
-      echo "Felicidades lo has conseguido en $Intentos intentos"
-      echo 1 > $Jugando 
-    elif [ $guess -gt $numRandom ]; then
-      echo "Es un numero menor vuelve a intentarlo"
-    else
-      echo "Es un numero menor vuelve a intentarlo"
-    fi
+
+# Función para el juego de adivinar el número
+jugar() {
+    numero_secreto=$(( RANDOM % 100 + 1 ))
+    intentos=0
+
+    echo "¡Bienvenido al juego de adivinar el número!"
+    echo "Estoy pensando en un número entre 1 y 100. ¿Puedes adivinarlo?"
+
+    while true; do
+        read -p "Introduce tu intento: " intento
+        ((intentos++))
+
+        # Validar que la entrada sea un número
+        if ! [[ "$intento" =~ ^[0-9]+$ ]]; then
+            echo "Por favor, introduce un número válido."
+            continue
+        fi
+
+        # Comparar el intento con el número secreto
+        if (( intento < numero_secreto )); then
+            echo "El número es mayor. Inténtalo de nuevo."
+        elif (( intento > numero_secreto )); then
+            echo "El número es menor. Inténtalo de nuevo."
+        else
+            echo "¡Felicidades! Has adivinado el número."
+            echo "Lo lograste en $intentos intentos."
+            break
+        fi
     done
-  ;;
-  2)
-    echo "Gracias por jugar. ¡Hasta pronto!"
-    echo 1 > $Jugando 
-  ;;
-  *)
-    echo "Opción no válida. Por favor, selecciona 1 o 2."
-  ;;
-  esac
-  done
+}
+
+# Menú principal
+while true; do
+    echo "--------------------------"
+    echo "       MENÚ PRINCIPAL     "
+    echo "--------------------------"
+    echo "1. Jugar"
+    echo "2. Salir"
+    echo "--------------------------"
+    read -p "Selecciona una opción (1 o 2): " opcion
+
+    case $opcion in
+        1)
+            jugar
+            ;;
+        2)
+            echo "Gracias por jugar. ¡Hasta pronto!"
+            exit 0
+            ;;
+        *)
+            echo "Opción no válida. Por favor, selecciona 1 o 2."
+            ;;
+    esac
+done
