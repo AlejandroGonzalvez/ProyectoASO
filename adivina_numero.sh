@@ -13,13 +13,13 @@ read opcion
         echo "Introduzca el numero"
         read guess
         ((Intentos++))
-        if (([ guess < NumRandom ))]; then
-            echo "Es un numero mayor vuelve a intentarlo"
+        if (( guess < NumRandom )); then
+            echo "Es un número mayor. Inténtalo de nuevo."
         elif (( guess > NumRandom )); then
-            echo "Es un numero menor vuelve a intentarlo"
+            echo "Es un número menor. Inténtalo de nuevo."
         else
             echo "¡Felicidades! Has adivinado el número."
-            echo "Lo lograste en $intentos intentos."
+            echo "Lo lograste en $Intentos intentos."
             break
         fi
         done
