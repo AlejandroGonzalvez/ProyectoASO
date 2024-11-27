@@ -22,3 +22,10 @@
 		fi
 	done
 #Revisar los archivos syslog y dmesg para detectar errores y eventos criticos
+	#Con el --level dmesg solo mostrara los mensajes de error el + le indica que incluya tambientodos los mensajes de un nivel superior a error em este caso eventos critucos, emergencias y alertas
+	echo "Mensajes de el dmesg"
+ 	dmesg --level=err+
+	#El grep filtrara los mensajes con la palabra error del syslog
+ 	echo "Mensajes de error del syslog"
+  	grep "error" /var/log/syslog
+   	grep "crit" /var/log/syslog
