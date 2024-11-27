@@ -1,8 +1,10 @@
 #!/bin/bash
 #Revisar los procesos que mas memoria consumen
 	#Identificar los cinco procesos que mas memoria consumen
+ 	echo "Cinco procesos que mas memoria consumen"
 	ps aux --sort=-%mem | head -n 6 | tail -n 5
 	#Identificar los cinco procesos que mas CPU concumen
+ 	echo "Cinco procesos que mas CPU consumen"
 	ps aux --sort=-%cpu | head -n 6 | tail -n 5
 #Revisar que ninguna particion tenga menos de un 10% de espacio libre
 	# Porcentaje límite de espacio libre
