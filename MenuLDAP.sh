@@ -48,7 +48,7 @@ case $opcion in
 		#Guardar el uidNumber incrementado
 		echo "$uidNumber" > "$uid_file"
 		#Anadir el usuario al registro LDAP
-		ldapadd -x -D "cn=admin,dc=AlexServer,dc=Local" -W -f /home/alejandro/ASOProyecto/ArchivosLDAP/UsuariosScript.ldif
+		ldapadd -x -D "cn=admin,dc=AlexServer,dc=Local" -W -f $ldif_file
 		#Limpiar el archivo ldif
 		: > "$ldif_file"
 	;;
@@ -64,7 +64,7 @@ case $opcion in
 		echo "replace: "$campo >> $ldif_file
 		echo $campo": "$nuevoCampo >> $ldif_file
 		#Ejecutar el cambio
-		ldapmodify -x -D cn=admin,dc=AlexServer,dc=Local -W -f /home/alejandro/ASOProyecto/ArchivosLDAP/Modificacion.ldif
+		ldapmodify -x -D cn=admin,dc=AlexServer,dc=Local -W -f $ldif_file
 		#Limpiar el archivo ldif
 		: > "$ldif_file"
 	;;
