@@ -1,13 +1,13 @@
 #!/bin/bash
-#Crear un documento donde se guarde to da la informacion
-	touch moni.txt
+# Establecer el nombre del archivo de log
+	LOGFILE="/var/log/monitorizacion.log"
 #Revisar los procesos que mas memoria consumen
 	#Identificar los cinco procesos que mas memoria consumen
- 	echo "Cinco procesos que mas memoria consumen" >> moni.txt
-	ps aux --sort=-%mem | head -n 6 | tail -n 5 >> moni.txt
+ 	logger -p local0.info -t MONITORIZACION "Cinco procesos que más memoria consumen:" >> $LOGFILE
+	ps aux --sort=-%mem | head -n 6 | tail -n 5 | logger -p local0.info -t MONITORIZACION >> $LOGFILE
 	#Identificar los cinco procesos que mas CPU concumen
- 	echo "Cinco procesos que mas CPU consumen" >> moni.txt
-	ps aux --sort=-%cpu | head -n 6 | tail -n 5 >> moni.txt
+ 	logger -p local0.info -t MONITORIZACION "Cinco procesos que más CPU consumen:" >> $LOGFILE
+	ps aux --sort=-%cpu | head -n 6 | tail -n 5 | logger -p local0.info -t MONITORIZACION >> $LOGFILE
 #Revisar que ninguna particion tenga menos de un 10% de espacio libre
 	# Porcentaje límite de espacio libre
 	Limite=10
@@ -20,14 +20,13 @@
 
 		# Verificar si el uso excede el umbral
 		if [ "$Uso" -ge $((100 - Limite)) ]; then
-			echo "Advertencia: La partición $Particion montada en $Ubicacion tiene menos del $Limite% de espacio libre ($USAGE% usado)." >> moni.txt
+			logger -p local0.warn -t MONITORIZACION "Advertencia: La partición $Particion montada en $Ubicacion tiene menos del $Limite% de espacio libre ($Uso% usado)." >> $LOGFILE
 		fi
 	done
 #Revisar los archivos syslog y dmesg para detectar errores y eventos criticos
 	#Con el --level dmesg solo mostrara los mensajes de error el + le indica que incluya tambientodos los mensajes de un nivel superior a error em este caso eventos critucos, emergencias y alertas
-	echo "Mensajes de el dmesg" >> moni.txt
- 	dmesg --level=err+ >> moni.txt
+		logger -p local0.err -t MONITORIZACION "Mensajes del dmesg (errores y eventos críticos):" >> $LOGFILE
+		dmesg --level=err+ | logger -p local0.err -t MONITORIZACION >> $LOGFILE
 	#El grep filtrara los mensajes con la palabra error del syslog
- 	echo "Mensajes de error del syslog" >> moni.txt
-  	grep "error" /var/log/syslog >> moni.txt
-   	grep "crit" /var/log/syslog >> moni.txt
+ 		logger -p local0.err -t MONITORIZACION "Mensajes de error y críticos del syslog:" >> $LOGFILE
+		grep -E "error|crit" /var/log/syslog | logger -p local0.err -t MONITORIZACION >> $LOGFILE
