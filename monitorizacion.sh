@@ -9,7 +9,7 @@
  	logger -p local0.info -t MONITORIZACION "Cinco procesos que más CPU consumen:" >> $LOGFILE
 	ps aux --sort=-%cpu | head -n 6 | tail -n 5 | logger -p local0.info -t MONITORIZACION >> $LOGFILE
 #Revisar que ninguna particion tenga menos de un 10% de espacio libre
-	# Porcentaje límite de espacio libre
+	# Porcentaje límite de espacio libre en la particion
 	Limite=10
 
 	# Obtener información sobre el uso de las particiones
