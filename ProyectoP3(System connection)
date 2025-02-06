@@ -1,1 +1,10 @@
+import platform
 
+sistema = platform.system()
+#Determinacion del sistema en el que se esta ejecutando
+if sistema == "Windows":
+    print("Sistema Windows")
+elif sistema == "Linux":
+    print("Sistema Linux")
+else:
+    print("ERROR:Sistema no reconocido")
