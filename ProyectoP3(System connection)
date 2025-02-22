@@ -19,10 +19,12 @@ if os.name == "nt":
 elif os.name == "posix":
     print("Sistema Linux")
 
-    host = "10.0.2.23"  # IP del servidor
-    port = 22  # Puerto SSH
-    user = "paco"  # Usuario SSH
-    password = "123"  # Contraseña SSH
+   # Solicitar datos de conexión al usuario
+    host = input("Introduzca la IP del equipo al que quiere conectarse: ")
+    user = input("Introduzca el usuario con el que quiere conectarse: ")
+    password = input("Introduzca la contraseña del usuario: ")
+
+    port = 22  # Puerto SSH por defecto
 
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
