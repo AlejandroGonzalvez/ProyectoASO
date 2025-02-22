@@ -45,5 +45,3 @@ elif os.name == "posix":
         client.close()
 else:
     print("ERROR: Sistema no reconocido")
-else:
-    print("ERROR:Sistema no reconocido")
