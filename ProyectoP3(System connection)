@@ -18,31 +18,32 @@ if os.name == "nt":
     os.system(f'cmdkey /delete:TERMSRV/{ip_destino}')
 elif os.name == "posix":
     print("Sistema Linux")
-    #Servidor SSH
 
-    # Datos del servidor
     host = "10.0.2.23"  # IP del servidor
-    port = 22  # Puerto SSH (por defecto es 22)
+    port = 22  # Puerto SSH
     user = "paco"  # Usuario SSH
-    password = "123"
+    password = "123"  # Contraseña SSH
 
-    # Crear cliente SSH
     client = paramiko.SSHClient()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())  # Evita problemas con claves desconocidas
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
     try:
-        # Conectar al servidor
-        client.connect(host, port, user, password)
+        print(f"Conectando a {host} con el usuario {user}...")
+        client.connect(hostname=host, port=port, username=user, password=password)
         print("Conexión establecida con éxito.")
 
-        # Ejecutar un comando remoto
         stdin, stdout, stderr = client.exec_command("uname -a")
         print("Salida del comando:", stdout.read().decode())
 
+    except paramiko.AuthenticationException:
+        print("Error de autenticación: Verifica usuario y contraseña.")
+    except paramiko.SSHException as e:
+        print("Error en la conexión SSH:", str(e))
     except Exception as e:
-        print("Error en la conexión:", e)
-
+        print("Otro error:", str(e))
     finally:
-        client.close()  # Cerrar la conexión
+        client.close()
+else:
+    print("ERROR: Sistema no reconocido")
 else:
     print("ERROR:Sistema no reconocido")
