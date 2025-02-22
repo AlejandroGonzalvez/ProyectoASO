@@ -24,7 +24,7 @@ elif os.name == "posix":
     host = "10.0.2.23"  # IP del servidor
     port = 22  # Puerto SSH (por defecto es 22)
     user = "paco"  # Usuario SSH
-    password = "45A89d63@21"
+    password = "123"
 
     # Crear cliente SSH
     client = paramiko.SSHClient()
