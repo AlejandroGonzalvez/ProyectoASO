@@ -1,10 +1,48 @@
-import platform
+import os
+import paramiko
 
-sistema = platform.system()
 #Determinacion del sistema en el que se esta ejecutando
-if sistema == "Windows":
+if os.name == "nt":
     print("Sistema Windows")
-elif sistema == "Linux":
+    ip_destino = input("Introduzca la IP del equipo al que quiere conectarse:")
+    usuario = input("Introduzca el usuario con el que quiere conectarse:")
+    contrasenna = input("Introduzca la contraseña del ususario:")
+
+    # Guardar credenciales en Windows
+    os.system(f'cmdkey /generic:TERMSRV/{ip_destino} /user:{usuario} /pass:{contrasenna}')
+
+    # Iniciar sesión RDP
+    os.system(f'mstsc /v:{ip_destino}')
+
+    # Opcional: Eliminar credenciales después de la conexión
+    os.system(f'cmdkey /delete:TERMSRV/{ip_destino}')
+elif os.name == "posix":
     print("Sistema Linux")
+    #Servidor SSH
+
+    # Datos del servidor
+    host = "10.0.2.23"  # IP del servidor
+    port = 22  # Puerto SSH (por defecto es 22)
+    user = "Alex"  # Usuario SSH
+    password = "123"
+
+    # Crear cliente SSH
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())  # Evita problemas con claves desconocidas
+
+    try:
+        # Conectar al servidor
+        client.connect(host, port, user, password)
+        print("Conexión establecida con éxito.")
+
+        # Ejecutar un comando remoto
+        stdin, stdout, stderr = client.exec_command("uname -a")
+        print("Salida del comando:", stdout.read().decode())
+
+    except Exception as e:
+        print("Error en la conexión:", e)
+
+    finally:
+        client.close()  # Cerrar la conexión
 else:
     print("ERROR:Sistema no reconocido")
