@@ -34,8 +34,26 @@ elif os.name == "posix":
         client.connect(hostname=host, port=port, username=user, password=password)
         print("Conexión establecida con éxito.")
 
-        stdin, stdout, stderr = client.exec_command("uname -a")
-        print("Salida del comando:", stdout.read().decode())
+        # Abrir una sesión interactiva
+        shell = client.invoke_shell()
+        shell.settimeout(0.5)
+
+        print("¡Estás dentro! Escribe comandos (escribe 'exit' para salir)")
+
+        while True:
+            # Leer entrada del usuario
+            command = input(f"{user}@{host}$ ")
+            if command.lower() == "exit":
+                print("Cerrando conexión...")
+                break
+
+            # Enviar comando al servidor
+            shell.send(command + "\n")
+            time.sleep(1)  # Dar tiempo a que el comando se ejecute
+
+            # Leer la salida del comando
+            output = shell.recv(65535).decode()
+            print(output)
 
     except paramiko.AuthenticationException:
         print("Error de autenticación: Verifica usuario y contraseña.")
