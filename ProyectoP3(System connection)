@@ -1,5 +1,7 @@
 import os
 import paramiko
+import sys
+import time
 
 #Determinacion del sistema en el que se esta ejecutando
 if os.name == "nt":
